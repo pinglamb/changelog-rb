@@ -1,4 +1,5 @@
 require "bundler/setup"
+require 'pp'
 require "fakefs/spec_helpers"
 require "changelog-rb"
 

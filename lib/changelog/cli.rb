@@ -17,20 +17,25 @@ module Changelog
       Changelog::Setup.new.go
     end
 
-    desc 'add ITEM', 'Add a new changelog item'
+    desc 'add [ITEM]', 'Add a new changelog item'
     method_option :nature,
       type: :string,
       desc: 'Type of changes',
-      default: '',
+      lazy_default: '',
       enum: Changelog.natures,
       aliases: %w(--type -t)
     method_option :author,
       type: :string,
       desc: 'User who makes the changes',
-      default: '',
+      lazy_default: '',
       aliases: %w(--user -u)
-    def add(title)
-      Changelog::Add.new.go(title, options[:nature], options[:author])
+    method_option :git,
+      type: :string,
+      desc: 'Extracts the title from git commit comment',
+      lazy_default: '',
+      aliases: %w(-g)
+    def add(title = '')
+      Changelog::Add.new.go(title, options.symbolize_keys)
     end
   end
 end

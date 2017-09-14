@@ -1,5 +1,6 @@
 require 'thor'
 require 'changelog/helpers/shell'
+require 'changelog/helpers/git'
 
 module Changelog
   class Add < Thor
@@ -9,10 +10,15 @@ module Changelog
       File.expand_path('../../templates', __FILE__)
     end
 
-
     no_commands do
-      def go(title, nature = '', author = '')
-        @title  = title
+      def go(title, nature: '', author: '', git: nil)
+        @title = if git.nil?
+          title
+        else
+          git = git.presence || 'HEAD'
+          Changelog::Helpers::Git.comment(git)
+        end
+        @title.gsub!(/:\w+:/, '')
         @nature = nature.presence || extract_nature_from_title(@title)
         @author = author.presence || Changelog::Helpers::Shell.system_user
 
@@ -21,7 +27,7 @@ module Changelog
         raise 'nature is invalid' unless @nature.in?(Changelog.natures)
         raise 'author is blank' if @author.blank?
 
-        filename = title.parameterize.underscore
+        filename = @title.parameterize.underscore
 
         empty_directory 'changelog/unreleased' unless File.exists?('changelog/unreleased')
         template 'item.yml', "changelog/unreleased/#{filename}.yml"
@@ -30,7 +36,7 @@ module Changelog
       end
 
       def extract_nature_from_title(title)
-        first_word = title.split.first
+        first_word = title.parameterize.split('-').first.try(:capitalize)
         if Changelog.natures.include?(first_word)
           first_word
         else

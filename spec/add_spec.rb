@@ -10,12 +10,12 @@ RSpec.describe Changelog::Add do
 
   it 'creates directory ./changelog/unreleased if it does not exist' do
     expect(File).not_to exist('changelog/unreleased')
-    add.go('Something', 'Added', 'someone')
+    add.go('Something', nature: 'Added', author: 'someone')
     expect(File).to exist('changelog/unreleased')
   end
 
   it 'generates the YAML file for the changelog item and add to ./changelog/unreleased' do
-    add.go('Added command for adding changelog item', 'Added', 'someone')
+    add.go('Added command for adding changelog item', nature: 'Added', author: 'someone')
     expect(File).to exist('changelog/unreleased/added_command_for_adding_changelog_item.yml')
 
     yaml = YAML.load_file('changelog/unreleased/added_command_for_adding_changelog_item.yml')
@@ -25,7 +25,7 @@ RSpec.describe Changelog::Add do
   end
 
   it 'guesses nature from title' do
-    add.go('Added command for adding changelog item', '', 'someone')
+    add.go('Added command for adding changelog item', author: 'someone')
 
     yaml = YAML.load_file('changelog/unreleased/added_command_for_adding_changelog_item.yml')
     expect(yaml['type']).to eq('Added')
@@ -46,7 +46,7 @@ RSpec.describe Changelog::Add do
     }.to raise_error('title is blank')
   end
 
-  it 'raises error if nature is not defined' do
+  it 'raises error if nature is not blank' do
     expect {
       add.go('I love changelog')
     }.to raise_error('nature is blank')
@@ -54,7 +54,34 @@ RSpec.describe Changelog::Add do
 
   it 'raises error if nature is not defined' do
     expect {
-      add.go('I love changelog', 'Modified')
+      add.go('I love changelog', nature: 'Modified')
     }.to raise_error('nature is invalid')
+  end
+
+  it 'grabs git HEAD commit comment as title' do
+    expect(Changelog::Helpers::Git).to receive(:comment).and_return('Added git support')
+    add.go('', git: 'HEAD')
+    expect(File).to exist('changelog/unreleased/added_git_support.yml')
+
+    yaml = YAML.load_file('changelog/unreleased/added_git_support.yml')
+    expect(yaml['title']).to eq("Added git support\n")
+  end
+
+  it 'handles emoji character in the title' do
+    expect(Changelog::Helpers::Git).to receive(:comment).and_return('✨Added git support')
+    add.go('', git: 'HEAD')
+    expect(File).to exist('changelog/unreleased/added_git_support.yml')
+
+    yaml = YAML.load_file('changelog/unreleased/added_git_support.yml')
+    expect(yaml['title']).to eq("✨Added git support\n")
+  end
+
+  it 'handles emoji symbol in the title' do
+    expect(Changelog::Helpers::Git).to receive(:comment).and_return(':sparkling: Added git support')
+    add.go('', git: 'HEAD')
+    expect(File).to exist('changelog/unreleased/added_git_support.yml')
+
+    yaml = YAML.load_file('changelog/unreleased/added_git_support.yml')
+    expect(yaml['title']).to eq("Added git support\n")
   end
 end
