@@ -14,4 +14,13 @@ RSpec.configure do |config|
   end
 
   config.include FakeFS::SpecHelpers
+
+  config.before :all do
+    @activesupport_gem_path = Bundler.definition.specs.find {|s| s.name == 'activesupport'}.full_gem_path
+  end
+
+  config.before :each do
+    FakeFS::FileSystem.clone(File.expand_path('../../', __FILE__))
+    FakeFS::FileSystem.clone(@activesupport_gem_path)
+  end
 end
