@@ -1,10 +1,10 @@
 # changelog-rb
 
-For project that uses feature branches and merge requests, it is common that the CHANGELOG.md will have conflicts. In order to prevent that, it is better to manage changelog items in a separate folder (`./changelog`) and generate the CHANGELOG.md during release.
+For project that uses feature branches and merge requests, it is common that the `CHANGELOG.md` will have conflicts. In order to prevent that, it is better to manage changelog items in a separate folder (`./changelog`) and generate the `CHANGELOG.md` during release.
 
-This gem defines a bunch of commands for simplifying the workflow for managing the changelog items in `./changelog`.
+This gem defines a bunch of commands to simplify the management of changelog items in `./changelog`.
 
-The `CHANGELOG.md` generated will follow the cool [Keepachangelog](http://keepachangelog.com/en/1.0.0/) is cool.
+The `CHANGELOG.md` generated will follow the amazing [keepachangelog](http://keepachangelog.com/en/1.0.0/) format.
 
 ## Installation
 
@@ -16,13 +16,13 @@ gem 'changelog-rb'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
     $ gem install changelog-rb
 
-## `./changelog` Structure
+## Folder Structure
 
 ```
 - changelog
@@ -110,7 +110,7 @@ $ changelog print
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
