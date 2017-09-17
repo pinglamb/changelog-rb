@@ -43,6 +43,11 @@ module Changelog
       Changelog::Tag.new.go(version)
     end
 
+    desc 'untag VERSION', 'Moved the changes from version folder to unreleased'
+    def untag(version)
+      Changelog::Untag.new.go(version)
+    end
+
     desc 'print', 'Print ./changelog to CHANGELOG.md'
     def print
       Changelog::Print.new.go
