@@ -9,4 +9,5 @@
 - ✨ Added tag script (@pinglamb)
 
 ### Changed
+- ✨ Make print supports version folders (@pinglamb)
 - ✨ Support getting title from git commit (@pinglamb)
