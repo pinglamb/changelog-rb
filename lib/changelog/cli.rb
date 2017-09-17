@@ -48,6 +48,11 @@ module Changelog
       Changelog::Untag.new.go(version)
     end
 
+    desc 'show VERSION', 'Print changes of VERSION'
+    def show(version)
+      Changelog::Show.new.go(version)
+    end
+
     desc 'print', 'Print ./changelog to CHANGELOG.md'
     def print
       Changelog::Print.new.go
