@@ -69,6 +69,11 @@ $ changelog add "Changed something"
 # title: Changed something
 # user: someone
 
+$ changelog add "Support something" -t Changed
+# type: Changed
+# title: Support something
+# user: someone
+
 $ git commit -m "Fixed something"
 $ changelog add -g
 # type: Fixed
