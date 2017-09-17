@@ -8,7 +8,7 @@ RSpec.describe Changelog::Print do
   }
 
   it 'prints to CHANGELOG.md according to ./changelog' do
-    FileUtils.cp_r("#{fixture_path}/changelog-1", './changelog')
+    FileUtils.cp_r("#{fixture_path}/changelog-1", 'changelog')
     printer.go
     expect(File).to exist('CHANGELOG.md')
 

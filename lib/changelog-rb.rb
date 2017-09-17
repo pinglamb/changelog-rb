@@ -11,4 +11,5 @@ end
 
 require "changelog/setup"
 require "changelog/add"
+require "changelog/tag"
 require "changelog/print"

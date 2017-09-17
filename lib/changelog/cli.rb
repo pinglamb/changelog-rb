@@ -38,6 +38,11 @@ module Changelog
       Changelog::Add.new.go(title, options.symbolize_keys)
     end
 
+    desc 'tag VERSION', 'Tag the unreleased changes to a version'
+    def tag(version)
+      Changelog::Tag.new.go(version)
+    end
+
     desc 'print', 'Print ./changelog to CHANGELOG.md'
     def print
       Changelog::Print.new.go

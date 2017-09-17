@@ -9,8 +9,6 @@ module Changelog
         empty_directory 'changelog'
         empty_directory 'changelog/unreleased'
         create_file 'changelog/unreleased/.gitkeep'
-
-        true
       end
     end
   end

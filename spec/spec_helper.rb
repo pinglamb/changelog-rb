@@ -1,5 +1,6 @@
 require "bundler/setup"
 require 'pp'
+require 'active_support/testing/time_helpers'
 require "fakefs/spec_helpers"
 require "changelog-rb"
 
@@ -15,6 +16,7 @@ RSpec.configure do |config|
   end
 
   config.include FakeFS::SpecHelpers
+  config.include ActiveSupport::Testing::TimeHelpers
   config.include Module.new {
     def fixture_path
       File.expand_path('../fixtures', __FILE__)
