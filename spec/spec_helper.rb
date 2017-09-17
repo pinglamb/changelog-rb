@@ -22,11 +22,14 @@ RSpec.configure do |config|
   }
 
   config.before :all do
+    @gem_root_path = File.expand_path('../../', __FILE__)
     @activesupport_gem_path = Bundler.definition.specs.find {|s| s.name == 'activesupport'}.full_gem_path
   end
 
   config.before :each do
-    FakeFS::FileSystem.clone(File.expand_path('../../', __FILE__))
-    FakeFS::FileSystem.clone(@activesupport_gem_path)
+    FakeFS::FileSystem.clone(File.join(@gem_root_path, 'lib/templates'))
+    FakeFS::FileSystem.clone(File.join(@gem_root_path, 'spec/fixtures'))
+    FakeFS::FileSystem.clone(File.join(@activesupport_gem_path, 'lib/active_support/values'))
+    FakeFS::FileSystem.clone(File.join(@activesupport_gem_path, 'lib/active_support/locale'))
   end
 end

@@ -13,21 +13,20 @@ module Changelog
         append_to_file 'CHANGELOG.md', "# Changelog\n\n", verbose: false
 
         append_to_file 'CHANGELOG.md', "## [Unreleased]\n", verbose: false
-        items = {
-          'Added' => [],
-          'Changed' => []
-        }
+        items = {}
         Dir[File.join(destination_root, 'changelog/unreleased/*.yml')].each do |file|
           yaml = YAML.load_file(file)
+          items[yaml['type']] ||= []
           items[yaml['type']] << "#{yaml['title'].strip} (@#{yaml['author']})"
         end
-        items.each.with_index do |(k, v), i|
-          unless v.empty?
-            append_to_file 'CHANGELOG.md', "### #{k}\n", verbose: false
-            v.each do |item|
-              append_to_file 'CHANGELOG.md', "- #{item}\n", verbose: false
+
+        Changelog.natures.each.with_index do |nature, i|
+          if changes = items[nature].presence
+            append_to_file 'CHANGELOG.md', "### #{nature}\n", verbose: false
+            changes.each do |change|
+              append_to_file 'CHANGELOG.md', "- #{change}\n", verbose: false
             end
-            append_to_file 'CHANGELOG.md', "\n", verbose: false, force: true unless i == items.count - 1
+            append_to_file 'CHANGELOG.md', "\n", verbose: false, force: true unless i == Changelog.natures.size - 1
           end
         end
       end
