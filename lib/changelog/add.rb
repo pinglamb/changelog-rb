@@ -18,7 +18,7 @@ module Changelog
           git = git.presence || 'HEAD'
           Changelog::Helpers::Git.comment(git)
         end
-        @title.gsub!(/:\w+:/, '')
+        @title = @title.gsub(/:\w+:/, '')
         @nature = nature.presence || extract_nature_from_title(@title)
         @author = author.presence || Changelog::Helpers::Shell.system_user
 

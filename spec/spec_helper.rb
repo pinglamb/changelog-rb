@@ -15,6 +15,11 @@ RSpec.configure do |config|
   end
 
   config.include FakeFS::SpecHelpers
+  config.include Module.new {
+    def fixture_path
+      File.expand_path('../fixtures', __FILE__)
+    end
+  }
 
   config.before :all do
     @activesupport_gem_path = Bundler.definition.specs.find {|s| s.name == 'activesupport'}.full_gem_path

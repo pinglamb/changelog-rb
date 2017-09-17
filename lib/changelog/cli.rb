@@ -37,5 +37,10 @@ module Changelog
     def add(title = '')
       Changelog::Add.new.go(title, options.symbolize_keys)
     end
+
+    desc 'print', 'Print ./changelog to CHANGELOG.md'
+    def print
+      Changelog::Print.new.go
+    end
   end
 end
