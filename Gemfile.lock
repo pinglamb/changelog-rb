@@ -3,6 +3,7 @@ PATH
   specs:
     changelog-rb (0.1.0)
       activesupport
+      semantic (~> 1.6.0)
       thor (~> 0.20.0)
 
 GEM
@@ -32,6 +33,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
+    semantic (1.6.0)
     thor (0.20.0)
     thread_safe (0.3.6)
     tzinfo (1.2.3)

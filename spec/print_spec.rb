@@ -11,7 +11,6 @@ RSpec.describe Changelog::Print do
     FileUtils.cp_r("#{fixture_path}/changelog-1", 'changelog')
     printer.go
     expect(File).to exist('CHANGELOG.md')
-
     expect(File.read('CHANGELOG.md')).to eq(File.read("#{fixture_path}/CHANGELOG-1.md"))
   end
 end

@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "thor", "~> 0.20.0"
   spec.add_runtime_dependency "activesupport"
+  spec.add_runtime_dependency "semantic", "~> 1.6.0"
 
   spec.add_development_dependency "bundler", "~> 1.16.a"
   spec.add_development_dependency "rake", "~> 10.0"
