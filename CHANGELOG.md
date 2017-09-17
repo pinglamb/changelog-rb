@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 
-## [0.1.1] - 2016-03-26
+## [0.1.1] - 2017-09-18
 ### Added
 - ✨ Added show script (@pinglamb)
 
