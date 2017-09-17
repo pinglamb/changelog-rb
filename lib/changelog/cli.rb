@@ -39,8 +39,13 @@ module Changelog
     end
 
     desc 'tag VERSION', 'Tag the unreleased changes to a version'
+    method_option :date,
+      type: :string,
+      desc: 'Date of release. Default: Today',
+      lazy_default: nil,
+      aliases: %w(-d)
     def tag(version)
-      Changelog::Tag.new.go(version)
+      Changelog::Tag.new.go(version, options.symbolize_keys)
     end
 
     desc 'untag VERSION', 'Moved the changes from version folder to unreleased'

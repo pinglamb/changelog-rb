@@ -9,9 +9,9 @@ module Changelog
     end
 
     no_commands do
-      def go(version)
+      def go(version, date: nil)
         @version = version
-        @date = Date.today.to_s
+        @date = date || Date.today.to_s
 
         empty_directory "changelog/#{@version}"
         template 'tag.yml', "changelog/#{@version}/tag.yml"

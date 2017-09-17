@@ -22,6 +22,12 @@ RSpec.describe Changelog::Tag do
     end
   end
 
+  it 'supports customizing the date' do
+    tag.go('0.1.0', date: '2016-07-01')
+    yaml = YAML.load_file('changelog/0.1.0/tag.yml')
+    expect(yaml['date'].to_s).to eq('2016-07-01')
+  end
+
   it 'moves the files in unreleased folder to the version folder' do
     FileUtils.mkdir('changelog')
     FileUtils.cp_r("#{fixture_path}/changelog-1/unreleased", 'changelog/unreleased')
