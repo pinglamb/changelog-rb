@@ -31,6 +31,22 @@ RSpec.describe Changelog::Add do
     expect(yaml['type']).to eq('Added')
   end
 
+  it 'guesses nature from title in smart way' do
+    {
+      'add something' => 'Added',
+      'new feature' => 'Added',
+      'ADDED this' => 'Added',
+      'update something' => 'Changed',
+      'make this happen' => 'Changed',
+      'fix something' => 'Fixed',
+      'deprecate something' => 'Deprecated',
+      'remove this and that' => 'Removed',
+      'protect this' => 'Security'
+    }.each do |title, nature|
+      expect(add.extract_nature_from_title(title)).to eq(nature)
+    end
+  end
+
   it 'guesses author from system' do
     expect(Changelog::Helpers::Shell).to receive(:system_user).and_return('someone')
 

@@ -1,10 +1,10 @@
 PATH
   remote: .
   specs:
-    changelog-rb (0.1.1)
+    changelog-rb (0.1.2)
       activesupport
-      semantic (~> 1.6.0)
-      thor (~> 0.20.0)
+      semantic
+      thor
 
 GEM
   remote: https://rubygems.org/

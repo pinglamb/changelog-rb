@@ -37,11 +37,19 @@ module Changelog
 
       def extract_nature_from_title(title)
         first_word = title.parameterize.split('-').first.try(:capitalize)
-        if Changelog.natures.include?(first_word)
-          first_word
-        else
-          ''
+        guess_nature_from_word(first_word) || ''
+      end
+
+      def guess_nature_from_word(word)
+        return word if word.blank?
+
+        Changelog.dictionary.each do |nature, words|
+          if words.include?(word.downcase)
+            return nature
+          end
         end
+
+        nil
       end
     end
   end
