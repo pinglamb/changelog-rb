@@ -1,6 +1,7 @@
 require 'thor'
 require 'yaml'
 require 'semantic'
+require 'changelog/helpers/git'
 require 'changelog/helpers/changes'
 
 module Changelog
@@ -16,10 +17,19 @@ module Changelog
 
         append_to_file 'CHANGELOG.md', "# Changelog\n", verbose: false
 
-        %w[unreleased].concat(version_folders).each do |version|
+        versions = %w[unreleased].concat(version_folders)
+
+        versions.each do |version|
           shell.say_status :append, "changes in changelog/#{version}", :green unless shell.mute?
           print_version_header version
           print_changes version
+        end
+
+        if Changelog::Helpers::Git.github_url.present?
+          append_to_file 'CHANGELOG.md', "\n", verbose: false, force: true
+          versions.each_cons(2) do |v1, v2|
+            append_to_file 'CHANGELOG.md', "[#{version_text(v1)}]: #{Changelog::Helpers::Git.compare_url(version_sha(v2), version_sha(v1))}\n", verbose: false
+          end
         end
       end
 

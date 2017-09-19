@@ -8,6 +8,9 @@ RSpec.describe Changelog::Print do
   }
 
   it 'prints to CHANGELOG.md according to ./changelog' do
+    allow(Changelog::Helpers::Git).to receive(:origin_url).and_return('git@github.com:username/repo.git')
+    allow(Changelog::Helpers::Git).to receive(:tag) { |version| "v#{version}" }
+
     FileUtils.cp_r("#{fixture_path}/changelog-1", 'changelog')
     printer.go
     expect(File).to exist('CHANGELOG.md')

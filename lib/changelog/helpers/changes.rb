@@ -1,15 +1,32 @@
 require 'yaml'
+require 'changelog/helpers/git'
 
 module Changelog
   module Helpers
     module Changes
       def version_header(folder)
         if folder == "unreleased"
-          "## [Unreleased]\n"
+          "## [#{version_text(folder)}]\n"
         else
           meta = YAML.load_file(File.join(destination_root, "changelog/#{folder}/tag.yml"))
           date = meta['date'].to_s
-          "## [#{folder}] - #{date}\n"
+          "## [#{version_text(folder)}] - #{date}\n"
+        end
+      end
+
+      def version_text(folder)
+        if folder == 'unreleased'
+          'Unreleased'
+        else
+          folder
+        end
+      end
+
+      def version_sha(folder)
+        if folder == 'unreleased'
+          'HEAD'
+        else
+          Changelog::Helpers::Git.tag(folder) || folder
         end
       end
 
