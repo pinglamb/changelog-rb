@@ -39,7 +39,7 @@ Or install it yourself as:
     - removed_something.yml
 ```
 
-All the pending/unreleased changelog items should be in the `unreleased` folder. Once you release a new version, the corresoding changelog items in `unreleased` should be moved over to `[RELEASE VERSION]` folder.
+All the pending/unreleased changelog items should be in the `unreleased` folder. Once you release a new version, the corresponding changelog items in `unreleased` should be moved over to `[RELEASE VERSION]` folder.
 
 The `tag.yml` in release folder is for recording the date of release.
 
