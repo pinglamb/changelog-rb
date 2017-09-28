@@ -35,7 +35,7 @@ module Changelog
       lazy_default: '',
       aliases: %w(-g)
     def add(title = '')
-      Changelog::Add.new.go(title, options.symbolize_keys)
+      Changelog::Add.new.go(title, **options.to_hash.symbolize_keys)
     end
 
     desc 'tag VERSION', 'Tag the unreleased changes to a version'
@@ -45,7 +45,7 @@ module Changelog
       lazy_default: nil,
       aliases: %w(-d)
     def tag(version)
-      Changelog::Tag.new.go(version, options.symbolize_keys)
+      Changelog::Tag.new.go(version, **options.to_hash.symbolize_keys)
     end
 
     desc 'untag VERSION', 'Moved the changes from version folder to unreleased'
