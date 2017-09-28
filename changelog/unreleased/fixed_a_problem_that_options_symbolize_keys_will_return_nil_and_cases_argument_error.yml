@@ -1,0 +1,4 @@
+type: Fixed
+title: >
+  🐛 Fixed a problem that options.symbolize_keys will return nil and cases argument error
+author: pinglamb
