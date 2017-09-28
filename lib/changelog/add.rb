@@ -22,10 +22,18 @@ module Changelog
         @nature = nature.presence || extract_nature_from_title(@title)
         @author = author.presence || Changelog::Helpers::Shell.system_user
 
-        raise 'title is blank' if @title.blank?
-        raise 'nature is blank' if @nature.blank?
-        raise 'nature is invalid' unless @nature.in?(Changelog.natures)
-        raise 'author is blank' if @author.blank?
+        if @title.blank?
+          return say("Error: title is blank\nchangelog add TITLE\nchangelog add -g")
+        end
+        if @nature.blank?
+          return say("Error: nature is blank\nchangelog add TITLE -t [#{Changelog.natures.join('|')}]")
+        end
+        unless @nature.in?(Changelog.natures)
+          return say("Error: nature is invalid\nchangelog add TITLE -t [#{Changelog.natures.join('|')}]")
+        end
+        if @author.blank?
+          return say("Error: author is blank\nchangelog add TITLE -u [author]")
+        end
 
         filename = @title.parameterize.underscore
 

@@ -57,21 +57,24 @@ RSpec.describe Changelog::Add do
   end
 
   it 'raises error if title is not blank' do
-    expect {
-      add.go('')
-    }.to raise_error('title is blank')
+    expect(add).to receive(:say) {|message| message}
+    expect(add.go('')).to eq("Error: title is blank\nchangelog add TITLE\nchangelog add -g")
   end
 
   it 'raises error if nature is not blank' do
-    expect {
-      add.go('I love changelog')
-    }.to raise_error('nature is blank')
+    expect(add).to receive(:say) {|message| message}
+    expect(add.go('I love changelog')).to eq("Error: nature is blank\nchangelog add TITLE -t [#{Changelog.natures.join('|')}]")
   end
 
   it 'raises error if nature is not defined' do
-    expect {
-      add.go('I love changelog', nature: 'Modified')
-    }.to raise_error('nature is invalid')
+    expect(add).to receive(:say) {|message| message}
+    expect(add.go('I love changelog', nature: 'Modified')).to eq("Error: nature is invalid\nchangelog add TITLE -t [#{Changelog.natures.join('|')}]")
+  end
+
+  it 'raises error if author is not blank' do
+    expect(Changelog::Helpers::Shell).to receive(:system_user).and_return('')
+    expect(add).to receive(:say) {|message| message}
+    expect(add.go('Added command for adding changelog item')).to eq("Error: author is blank\nchangelog add TITLE -u [author]")
   end
 
   it 'grabs git HEAD commit comment as title' do
