@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    changelog-rb (0.2.0)
+    changelog-rb (0.2.1)
       activesupport
       semantic
       thor
