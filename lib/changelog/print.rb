@@ -45,7 +45,14 @@ module Changelog
       def version_folders
         (Dir[File.join(destination_root, 'changelog/*')] - [
           File.join(destination_root, "changelog/unreleased")
-        ]).collect {|path| File.basename(path)}.sort_by {|version| Semantic::Version.new(version)}.reverse
+        ]).collect {|path| File.basename(path)}.sort_by {|version|
+          if version.match Semantic::Version::SemVerRegexp
+            Semantic::Version.new(version)
+          elsif version.match /\A(0|[1-9]\d*)\.(0|[1-9]\d*)\Z/
+            # Example: 0.3, 1.5, convert it to 0.3.0, 1.5.0
+            Semantic::Version.new("#{version}.0")
+          end
+        }.reverse
       end
     end
   end
