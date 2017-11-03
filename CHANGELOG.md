@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.2.2] - 2017-11-03
+### Changed
+- ✨ Updated print to handle non 2 numbers version tag (e.g. 0.3, 1.5) (@pinglamb)
+
 ## [0.2.1] - 2017-09-28
 ### Changed
 - ✨ Improved the error message of the changelog add command (@pinglamb)
@@ -40,8 +44,9 @@
 - ✨ Make print supports version folders (@pinglamb)
 - ✨ Support getting title from git commit (@pinglamb)
 
-[Unreleased]: https://github.com/pinglamb/changelog-rb/compare/0.2.1...HEAD
-[0.2.1]: https://github.com/pinglamb/changelog-rb/compare/v0.2.0...0.2.1
+[Unreleased]: https://github.com/pinglamb/changelog-rb/compare/0.2.2...HEAD
+[0.2.2]: https://github.com/pinglamb/changelog-rb/compare/v0.2.1...0.2.2
+[0.2.1]: https://github.com/pinglamb/changelog-rb/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/pinglamb/changelog-rb/compare/v0.1.3...v0.2.0
 [0.1.3]: https://github.com/pinglamb/changelog-rb/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/pinglamb/changelog-rb/compare/v0.1.1...v0.1.2
