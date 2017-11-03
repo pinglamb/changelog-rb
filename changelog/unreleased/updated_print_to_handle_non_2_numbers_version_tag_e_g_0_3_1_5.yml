@@ -1,0 +1,4 @@
+type: Changed
+title: >
+  ✨ Updated print to handle non 2 numbers version tag (e.g. 0.3, 1.5)
+author: pinglamb
