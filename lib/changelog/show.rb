@@ -9,8 +9,22 @@ module Changelog
     no_commands do
       include Changelog::Helpers::Changes
 
-      def go(version)
-        if File.exists?(File.join(destination_root, "changelog/#{version}"))
+      def go(version = nil)
+        versions = if version
+                     versions = [version]
+                   else
+                     %w[unreleased].push(version_folders.first)
+                   end
+
+        versions.each do |version|
+          print_version(version)
+        end
+      end
+
+      private
+
+      def print_version(version)
+        if File.exist?(File.join(destination_root, "changelog/#{version}"))
           puts version_header(version)
           puts read_changes(version)
         else

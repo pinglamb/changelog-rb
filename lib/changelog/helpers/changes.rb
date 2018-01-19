@@ -58,6 +58,19 @@ module Changelog
           File.join(destination_root, "changelog/#{folder}/tag.yml")
         ]
       end
+
+      def version_folders
+        (Dir[File.join(destination_root, 'changelog/*')] - [
+          File.join(destination_root, 'changelog/unreleased')
+        ]).collect { |path| File.basename(path) }.sort_by do |version|
+          if version.match Semantic::Version::SemVerRegexp
+            Semantic::Version.new(version)
+          elsif version =~ /\A(0|[1-9]\d*)\.(0|[1-9]\d*)\Z/
+            # Example: 0.3, 1.5, convert it to 0.3.0, 1.5.0
+            Semantic::Version.new("#{version}.0")
+          end
+        end.reverse
+      end
     end
   end
 end
