@@ -54,7 +54,8 @@ module Changelog
       end
 
       def changelog_files(folder)
-        Dir[File.join(destination_root, "changelog/#{folder}/*.yml")] - [
+        Dir[File.join(destination_root, "changelog/#{folder}/*.yml")]
+          .sort_by { |path| File.basename(path)} - [
           File.join(destination_root, "changelog/#{folder}/tag.yml")
         ]
       end
