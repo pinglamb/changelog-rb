@@ -54,7 +54,7 @@ module Changelog
     end
 
     desc 'show VERSION', 'Print changes of VERSION'
-    def show(version)
+    def show(version = nil)
       Changelog::Show.new.go(version)
     end
 

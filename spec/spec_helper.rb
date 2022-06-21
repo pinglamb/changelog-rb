@@ -1,5 +1,6 @@
 require "bundler/setup"
 require 'pp'
+require 'pry'
 require 'active_support/testing/time_helpers'
 require "fakefs/spec_helpers"
 require "changelog-rb"
