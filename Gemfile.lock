@@ -46,10 +46,13 @@ GEM
       thread_safe (~> 0.1)
 
 PLATFORMS
+  arm64-darwin-21
   ruby
+  x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
-  bundler (~> 1.16.a)
+  bundler (>= 2.3.15)
   changelog-rb!
   fakefs (~> 1.7.0)
   pry
@@ -57,4 +60,4 @@ DEPENDENCIES
   rspec (~> 3.0)
 
 BUNDLED WITH
-   1.17.3
+   2.3.16

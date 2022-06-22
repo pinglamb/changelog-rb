@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "activesupport"
   spec.add_runtime_dependency "semantic"
 
-  spec.add_development_dependency "bundler", "~> 1.16.a"
+  spec.add_development_dependency "bundler", ">= 2.3.15"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "fakefs", "~> 1.7.0"
