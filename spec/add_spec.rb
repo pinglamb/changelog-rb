@@ -18,7 +18,7 @@ RSpec.describe Changelog::Add do
     add.go('Added command for adding changelog item', nature: 'Added', author: 'someone')
     expect(File).to exist('changelog/unreleased/added_command_for_adding_changelog_item.yml')
 
-    yaml = YAML.load_file('changelog/unreleased/added_command_for_adding_changelog_item.yml')
+    yaml = WorkaroundYAML.load_file('changelog/unreleased/added_command_for_adding_changelog_item.yml')
     expect(yaml['type']).to eq('Added')
     expect(yaml['title']).to eq("Added command for adding changelog item\n")
     expect(yaml['author']).to eq('someone')
@@ -27,7 +27,7 @@ RSpec.describe Changelog::Add do
   it 'guesses nature from title' do
     add.go('Added command for adding changelog item', author: 'someone')
 
-    yaml = YAML.load_file('changelog/unreleased/added_command_for_adding_changelog_item.yml')
+    yaml = WorkaroundYAML.load_file('changelog/unreleased/added_command_for_adding_changelog_item.yml')
     expect(yaml['type']).to eq('Added')
   end
 
@@ -52,7 +52,7 @@ RSpec.describe Changelog::Add do
 
     add.go('Added command for adding changelog item')
 
-    yaml = YAML.load_file('changelog/unreleased/added_command_for_adding_changelog_item.yml')
+    yaml = WorkaroundYAML.load_file('changelog/unreleased/added_command_for_adding_changelog_item.yml')
     expect(yaml['author']).to eq('someone')
   end
 
@@ -82,7 +82,7 @@ RSpec.describe Changelog::Add do
     add.go('', git: 'HEAD')
     expect(File).to exist('changelog/unreleased/added_git_support.yml')
 
-    yaml = YAML.load_file('changelog/unreleased/added_git_support.yml')
+    yaml = WorkaroundYAML.load_file('changelog/unreleased/added_git_support.yml')
     expect(yaml['title']).to eq("Added git support\n")
   end
 
@@ -91,7 +91,7 @@ RSpec.describe Changelog::Add do
     add.go('', git: 'HEAD')
     expect(File).to exist('changelog/unreleased/added_git_support.yml')
 
-    yaml = YAML.load_file('changelog/unreleased/added_git_support.yml')
+    yaml = WorkaroundYAML.load_file('changelog/unreleased/added_git_support.yml')
     expect(yaml['title']).to eq("✨Added git support\n")
   end
 
@@ -100,7 +100,7 @@ RSpec.describe Changelog::Add do
     add.go('', git: 'HEAD')
     expect(File).to exist('changelog/unreleased/added_git_support.yml')
 
-    yaml = YAML.load_file('changelog/unreleased/added_git_support.yml')
+    yaml = WorkaroundYAML.load_file('changelog/unreleased/added_git_support.yml')
     expect(yaml['title']).to eq("Added git support\n")
   end
 end

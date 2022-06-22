@@ -8,7 +8,7 @@ module Changelog
         if folder == "unreleased"
           "## [#{version_text(folder)}]\n"
         else
-          meta = YAML.load_file(File.join(destination_root, "changelog/#{folder}/tag.yml"))
+          meta = WorkaroundYAML.load_file(File.join(destination_root, "changelog/#{folder}/tag.yml"))
           date = meta['date'].to_s
           "## [#{version_text(folder)}] - #{date}\n"
         end
@@ -33,7 +33,7 @@ module Changelog
       def read_changes(folder)
         items = {}
         changelog_files(folder).each do |file|
-          yaml = YAML.load_file(file)
+          yaml = WorkaroundYAML.load_file(file)
           items[yaml['type']] ||= []
           items[yaml['type']] << "#{yaml['title'].strip} (@#{yaml['author']})"
         end

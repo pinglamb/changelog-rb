@@ -17,14 +17,14 @@ RSpec.describe Changelog::Tag do
       tag.go('0.1.0')
       expect(File).to exist('changelog/0.1.0/tag.yml')
 
-      yaml = YAML.load_file('changelog/0.1.0/tag.yml')
+      yaml = WorkaroundYAML.load_file('changelog/0.1.0/tag.yml')
       expect(yaml['date']).to eq(Date.today)
     end
   end
 
   it 'supports customizing the date' do
     tag.go('0.1.0', date: '2016-07-01')
-    yaml = YAML.load_file('changelog/0.1.0/tag.yml')
+    yaml = WorkaroundYAML.load_file('changelog/0.1.0/tag.yml')
     expect(yaml['date'].to_s).to eq('2016-07-01')
   end
 

@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Make developers happy with http://keepachangelog.com/.}
   spec.homepage      = "https://github.com/pinglamb/changelog-rb"
   spec.license       = "MIT"
+  spec.required_ruby_version = Gem::Requirement.new(">= 2.4.6")
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})

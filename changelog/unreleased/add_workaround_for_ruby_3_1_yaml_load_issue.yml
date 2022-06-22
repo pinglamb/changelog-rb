@@ -1,0 +1,4 @@
+type: Added
+title: >
+  Add workaround for ruby 3.1 YAML.load issue and add required_ruby_version to gemspec
+author: lijunwei
