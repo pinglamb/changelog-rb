@@ -1,0 +1,4 @@
+type: Fixed
+title: >
+  Fix print_spec by upgrading fakefs version
+author: lijunwei
