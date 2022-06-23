@@ -1,11 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Changelog::Show do
-  let(:show) do
-    Changelog::Show.new.tap do |i|
-      allow(i.shell).to receive(:mute?).and_return(true)
-    end
-  end
+  let(:show) { Changelog::Show.new }
 
   it 'prints changes of unreleased and the lastest version ' do
     log = <<~EOS

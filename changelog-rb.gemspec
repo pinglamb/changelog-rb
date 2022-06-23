@@ -21,13 +21,14 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "thor"
-  spec.add_runtime_dependency "activesupport"
-  spec.add_runtime_dependency "semantic"
+  spec.add_runtime_dependency "thor", "~> 1.2.1"
+  spec.add_runtime_dependency "activesupport", "<= 5.2.8"
+  spec.add_runtime_dependency "minitest", "<= 5.11.1"
+  spec.add_runtime_dependency "semantic", "~> 1.6.1"
 
-  spec.add_development_dependency "bundler", ">= 2.3.15"
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "bundler", "~> 2.3.14"
+  spec.add_development_dependency "rake", "~> 13.0.6"
+  spec.add_development_dependency "rspec", "~> 3.11.0"
   spec.add_development_dependency "fakefs", "~> 1.7.0"
-  spec.add_development_dependency "pry"
+  spec.add_development_dependency "pry", "~> 0.14.1"
 end
