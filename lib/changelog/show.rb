@@ -10,11 +10,7 @@ module Changelog
       include Changelog::Helpers::Changes
 
       def go(version = nil)
-        versions = if version
-                     versions = [version]
-                   else
-                     %w[unreleased].push(version_folders.first)
-                   end
+        versions = version.nil? ? default_shown_versions : Array[version]
 
         versions.each do |version|
           print_version(version)
@@ -25,11 +21,15 @@ module Changelog
 
       def print_version(version)
         if File.exist?(File.join(destination_root, "changelog/#{version}"))
-          puts version_header(version)
-          puts read_changes(version)
+          say version_header(version)
+          say read_changes(version)
         else
           say "changelog/#{version} not found"
         end
+      end
+
+      def default_shown_versions
+        %w[unreleased].push(latest_version).compact
       end
     end
   end

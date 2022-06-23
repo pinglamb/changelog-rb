@@ -72,6 +72,10 @@ module Changelog
           end
         end.reverse
       end
+
+      def latest_version
+        version_folders.first
+      end
     end
   end
 end

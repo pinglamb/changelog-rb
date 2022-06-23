@@ -53,7 +53,7 @@ module Changelog
       Changelog::Untag.new.go(version)
     end
 
-    desc 'show VERSION', 'Print changes of VERSION'
+    desc 'show VERSION', 'Print changes of VERSION, default show unreleased and latest'
     def show(version = nil)
       Changelog::Show.new.go(version)
     end
