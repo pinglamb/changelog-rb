@@ -25,18 +25,18 @@ Or install it yourself as:
 ## Folder Structure
 
 ```
-- changelog
-  - 0.1.1
-    - fixed_something.yml
-    - tag.yml
-  - 0.1.0
-    - added_something.yml
-    - changed_something.yml
-    - tag.yml
-  - unreleased
-    - added_something.yml
-    - changed_something.yml
-    - removed_something.yml
+changelog
+├── 0.1.1
+│   ├── fixed_something.yml
+│   └── tag.yml
+├── 0.1.0
+│   ├── added_something.yml
+│   ├── changed_something.yml
+│   └── tag.yml
+└── unreleased
+    ├── added_something.yml
+    ├── changed_something.yml
+    └── removed_something.yml
 ```
 
 All the pending/unreleased changelog items should be in the `unreleased` folder. Once you release a new version, the corresponding changelog items in `unreleased` should be moved over to `[RELEASE VERSION]` folder.
@@ -59,11 +59,13 @@ $ changelog setup
 
 Add a changelog item.
 
+| option| desc | detail |
+|-------|------|--------|
 | `-t` | Type of changes (one of the following `Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`) | If not specified, it will try to derive it from the first word of the title |
 | `-u` | Author | If not specified, it will be $USER |
 | `-g` | From git commit comment | *Magic*. Get the git commit comment as changelog title. Please try to use it with `gitmoji`. |
 
-```
+```bash
 $ changelog add "Changed something"
 # type: Changed
 # title: Changed something
@@ -92,23 +94,32 @@ $ changelog add -g
 
 Move `unreleased` changelog items to the `version` given and tag today as release date.
 
-```
+```bash
 $ changelog tag 0.1.0
+```
+
+### `show`
+
+Show changelog of (`unreleased` and `latest` version) or `specific` version
+
+```bash
+$ changelog show
+$ changelog show 0.1.0
 ```
 
 ### `untag`
 
 Move the changelog items in `version` back to `unreleased` and clean it up.
 
-```
+```bash
 $ changelog untag 0.1.0
 ```
 
 ### `print`
 
-Convert `./changelog` to `CHANGELOG.md`
+Generate `CHANGELOG.md` from `./changelog`
 
-```
+```bash
 $ changelog print
 ```
 
