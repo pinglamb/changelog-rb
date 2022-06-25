@@ -21,4 +21,18 @@ RSpec.describe Changelog::Setup do
     setup.go
     expect(File).to exist('changelog/unreleased/.gitkeep')
   end
+
+  it 'is invoked multiple times without unexpected side effects' do
+    setup.go
+    old_md5sum = check_md5sum_of("changelog")
+
+    setup.go
+    setup.go
+    new_md5sum = check_md5sum_of("changelog")
+    expect(new_md5sum).to eq(old_md5sum)
+
+    expect(File).to exist('changelog')
+    expect(File).to exist('changelog/unreleased')
+    expect(File).to exist('changelog/unreleased/.gitkeep')
+  end
 end

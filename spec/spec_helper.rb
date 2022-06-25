@@ -36,3 +36,10 @@ RSpec.configure do |config|
     FakeFS::FileSystem.clone(File.join(@activesupport_gem_path, 'lib/active_support/locale'))
   end
 end
+
+def check_md5sum_of(folder)
+  require 'digest'
+  all = Dir["changelog/**/*"]
+  hash = all.select {|entry| File.file?(entry)}.each_with_object({}) {|e, h| h[Digest::MD5.hexdigest(File.read(e))] = e}.sort_by {|k,v| v}
+  Digest::MD5.hexdigest(Marshal::dump(hash))
+end
