@@ -37,8 +37,8 @@ module Changelog
 
         filename = @title.parameterize.underscore
 
-        empty_directory 'changelog/unreleased' unless File.exists?('changelog/unreleased')
-        template 'item.yml', "changelog/unreleased/#{filename}.yml"
+        empty_directory "#{Changelog.configuration.versions_path}/unreleased" unless File.exists?("#{Changelog.configuration.versions_path}/unreleased")
+        template 'item.yml', "#{Changelog.configuration.versions_path}/unreleased/#{filename}.yml"
 
         true
       end

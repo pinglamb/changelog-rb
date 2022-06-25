@@ -28,23 +28,20 @@ RSpec.describe Changelog::Show do
       ### Added
       - Added something again (@someone)
     EOS
-    FileUtils.cp_r("#{fixture_path}/changelog-1", 'changelog')
     expect do
       show.go
     end.to output(log).to_stdout
   end
 
   it 'prints changes of the version' do
-    FileUtils.cp_r("#{fixture_path}/changelog-1", 'changelog')
     expect do
       show.go('0.2.1')
     end.to output("## [0.2.1] - 2017-09-17\n### Fixed\n- Fixed something (@someone)\n").to_stdout
   end
 
   it 'reports error if version not found' do
-    FileUtils.cp_r("#{fixture_path}/changelog-1", 'changelog')
     expect do
       show.go('0.2.2')
-    end.to output("changelog/0.2.2 not found\n").to_stdout
+    end.to output("#{changelog_root}/0.2.2 not found\n").to_stdout
   end
 end

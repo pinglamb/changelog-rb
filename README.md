@@ -1,3 +1,5 @@
++ TODO make changelog path and CHANGELOG file configurable
+
 # changelog-rb
 
 For project that uses feature branches and merge requests, it is common that the `CHANGELOG.md` will have conflicts. In order to prevent that, it is better to manage changelog items in a separate folder (`./changelog`) and generate the `CHANGELOG.md` during release.

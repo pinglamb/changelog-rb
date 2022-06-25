@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "thor"
 
 module Changelog
@@ -8,16 +10,16 @@ module Changelog
       def go(version)
         @version = version
 
-        remove_file "changelog/#{@version}/tag.yml"
+        remove_file "#{Changelog.configuration.versions_path}/#{@version}/tag.yml"
 
-        empty_directory 'changelog/unreleased'
-        shell.say_status :move, "changelog/#{@version}/*.yml to changelog/unreleased", :green unless shell.mute?
+        empty_directory "#{Changelog.configuration.versions_path}/unreleased"
+        shell.say_status :move, "#{Changelog.configuration.versions_path}/#{@version}/*.yml to #{Changelog.configuration.versions_path}/unreleased", :green unless shell.mute?
         FileUtils.mv(
-          Dir[File.join(destination_root, "changelog/#{@version}/*.yml")],
-          File.join(destination_root, 'changelog/unreleased')
+          Dir[File.join(destination_root, "#{Changelog.configuration.versions_path}/#{@version}/*.yml")],
+          File.join(destination_root, "#{Changelog.configuration.versions_path}/unreleased")
         )
 
-        remove_file "changelog/#{@version}"
+        remove_file "#{Changelog.configuration.versions_path}/#{@version}"
       end
     end
   end

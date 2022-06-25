@@ -5,6 +5,7 @@
 /doc/
 /pkg/
 /spec/reports/
+/spec/sandbox/
 /tmp/
 .rspec_status
 Gemfile.lock

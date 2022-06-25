@@ -10,4 +10,16 @@ module PathHelpers
   def activesupport_gem_path
     Bundler.definition.specs.find {|s| s.name == 'activesupport'}.full_gem_path
   end
+
+  def destination_root
+    File.expand_path('spec/sandbox', gem_root_path)
+  end
+
+  def changelog_root
+    Changelog.configuration.versions_path
+  end
+
+  def changelog_summary
+    Changelog.configuration.summary_path
+  end
 end

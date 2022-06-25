@@ -20,11 +20,11 @@ module Changelog
       private
 
       def print_version(version)
-        if File.exist?(File.join(destination_root, "changelog/#{version}"))
+        if File.exist?(File.join(destination_root, "#{Changelog.configuration.versions_path}/#{version}"))
           say version_header(version)
           say read_changes(version)
         else
-          say "changelog/#{version} not found"
+          say "#{Changelog.configuration.versions_path}/#{version} not found"
         end
       end
 

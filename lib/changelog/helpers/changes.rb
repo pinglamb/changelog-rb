@@ -8,7 +8,7 @@ module Changelog
         if folder == "unreleased"
           "## [#{version_text(folder)}]\n"
         else
-          meta = WorkaroundYAML.load_file(File.join(destination_root, "changelog/#{folder}/tag.yml"))
+          meta = WorkaroundYAML.load_file(File.join(destination_root, "#{Changelog.configuration.versions_path}/#{folder}/tag.yml"))
           date = meta['date'].to_s
           "## [#{version_text(folder)}] - #{date}\n"
         end
@@ -54,23 +54,24 @@ module Changelog
       end
 
       def changelog_files(folder)
-        Dir[File.join(destination_root, "changelog/#{folder}/*.yml")]
+        Dir[File.join(destination_root, "#{Changelog.configuration.versions_path}/#{folder}/*.yml")]
           .sort_by { |path| File.basename(path)} - [
-          File.join(destination_root, "changelog/#{folder}/tag.yml")
+          File.join(destination_root, "#{Changelog.configuration.versions_path}/#{folder}/tag.yml")
         ]
       end
 
+      # TODO refactor this mess...
       def version_folders
-        (Dir[File.join(destination_root, 'changelog/*')] - [
-          File.join(destination_root, 'changelog/unreleased')
-        ]).collect { |path| File.basename(path) }.sort_by do |version|
+        (Dir[File.join(destination_root, "#{Changelog.configuration.versions_path}/*")] - [
+          File.join(destination_root, "#{Changelog.configuration.versions_path}/unreleased")
+        ]).collect {|path| File.basename(path)}.sort_by {|version|
           if version.match Semantic::Version::SemVerRegexp
             Semantic::Version.new(version)
-          elsif version =~ /\A(0|[1-9]\d*)\.(0|[1-9]\d*)\Z/
+          elsif version.match /\A(0|[1-9]\d*)\.(0|[1-9]\d*)\Z/
             # Example: 0.3, 1.5, convert it to 0.3.0, 1.5.0
             Semantic::Version.new("#{version}.0")
           end
-        end.reverse
+        }.reverse
       end
 
       def latest_version

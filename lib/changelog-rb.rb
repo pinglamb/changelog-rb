@@ -18,6 +18,19 @@ module Changelog
       'Security'   => %w[security protect],
     }
   end
+
+  def self.configuration
+    @configuration ||= Configuration.new
+  end
+
+  def self.configure
+    yield configuration if block_given?
+  end
+
+  class Configuration
+    attr_accessor :versions_path
+    attr_accessor :summary_path
+  end
 end
 
 require "changelog/setup"
@@ -37,4 +50,9 @@ module WorkaroundYAML
       YAML.load_file(filename)
     end
   end
+end
+
+Changelog.configure do |config|
+  config.versions_path = "changelog"
+  config.summary_path = "CHANGELOG.md"
 end
