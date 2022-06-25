@@ -1,0 +1,4 @@
+type: Changed
+title: >
+  Refactor usage of File.expand_path
+author: lijunwei

@@ -20,12 +20,12 @@ RSpec.configure do |config|
   config.include ActiveSupport::Testing::TimeHelpers
   config.include Module.new {
     def fixture_path
-      File.expand_path('../fixtures', __FILE__)
+      File.expand_path('./fixtures', File.dirname(__FILE__))
     end
   }
 
   config.before :all do
-    @gem_root_path = File.expand_path('../../', __FILE__)
+    @gem_root_path = File.expand_path('../', File.dirname(__FILE__))
     @activesupport_gem_path = Bundler.definition.specs.find {|s| s.name == 'activesupport'}.full_gem_path
   end
 
