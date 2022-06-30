@@ -4,10 +4,6 @@ module Changelog
   class Untag < Thor
     include Thor::Actions
 
-    def self.source_root
-      File.expand_path('../../templates', __FILE__)
-    end
-
     no_commands do
       def go(version)
         @version = version

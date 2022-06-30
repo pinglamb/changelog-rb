@@ -21,18 +21,15 @@ module Changelog
     method_option :nature,
       type: :string,
       desc: 'Type of changes. Default: Derive from first word of TITLE',
-      lazy_default: '',
       enum: Changelog.natures,
       aliases: %w(--type -t)
     method_option :author,
       type: :string,
       desc: 'User who makes the changes. Default: $USER',
-      lazy_default: '',
       aliases: %w(--user -u)
     method_option :git,
       type: :string,
       desc: 'Extracts the title from git commit comment. Default: HEAD',
-      lazy_default: '',
       aliases: %w(-g)
     def add(title = '')
       Changelog::Add.new.go(title, **options.to_hash.symbolize_keys)
@@ -42,7 +39,6 @@ module Changelog
     method_option :date,
       type: :string,
       desc: 'Date of release. Default: Today',
-      lazy_default: nil,
       aliases: %w(-d)
     def tag(version)
       Changelog::Tag.new.go(version, **options.to_hash.symbolize_keys)

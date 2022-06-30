@@ -5,7 +5,7 @@ module Changelog
     include Thor::Actions
 
     def self.source_root
-      File.expand_path('../../templates', __FILE__)
+      File.expand_path('../templates', __dir__)
     end
 
     no_commands do
