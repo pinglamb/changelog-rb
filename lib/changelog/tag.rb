@@ -18,7 +18,7 @@ module Changelog
         empty_directory "#{Changelog.configuration.versions_path}/#{@version}"
         template "tag.yml", "#{Changelog.configuration.versions_path}/#{@version}/tag.yml"
 
-        shell.say_status :move, "#{Changelog.configuration.versions_path}/#{@version}/*.yml from #{Changelog.configuration.versions_path}/unreleased", :green unless shell.mute?
+        shell.say_status :move, "#{Changelog.configuration.versions_path}/unreleased/*.yml to #{Changelog.configuration.versions_path}/#{@version}/", :green unless shell.mute?
         FileUtils.mv(
           Dir[File.join(destination_root, "#{Changelog.configuration.versions_path}/unreleased/*.yml")],
           File.join(destination_root, "#{Changelog.configuration.versions_path}/#{@version}")

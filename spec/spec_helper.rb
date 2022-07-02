@@ -1,7 +1,5 @@
 require "bundler/setup"
-require 'pp'
 require 'pry'
-require 'active_support/testing/time_helpers'
 require "changelog-rb"
 
 require_relative 'support/md5sum_helpers'
@@ -15,23 +13,22 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.include ActiveSupport::Testing::TimeHelpers
   config.include PathHelpers
   config.include Md5sumHelpers
 
+  sandbox_root = "spec/sandbox"
+
   config.around :each do |example|
     Changelog.configure do |config|
-      config.versions_path = "spec/sandbox/changelog"
-      config.summary_path = "spec/sandbox/CHANGELOG.md"
+      config.versions_path = "#{sandbox_root}/changelog"
+      config.summary_path  = "#{sandbox_root}/CHANGELOG.md"
     end
 
-    FileUtils.mkdir_p File.expand_path('spec/sandbox', gem_root_path)
-
-    FileUtils.cp_r("#{fixture_path}/changelog-1", File.expand_path('spec/sandbox/changelog', gem_root_path))
+    FileUtils.mkdir_p sandbox_root
 
     example.run
 
-    FileUtils.rm_rf File.expand_path('spec/sandbox', gem_root_path)
+    FileUtils.rm_rf sandbox_root
   end
 end
 
