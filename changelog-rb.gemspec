@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative "lib/changelog/version.rb"
 
 Gem::Specification.new do |spec|
@@ -31,5 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry", "~> 0.14.1"
   spec.add_development_dependency "rubocop", "~> 1.31.1"
   spec.add_development_dependency "flog", "~> 4.6", ">= 4.6.5"
-  spec.add_development_dependency 'flay', '~> 2.13'
+  spec.add_development_dependency "flay", "~> 2.13"
 end

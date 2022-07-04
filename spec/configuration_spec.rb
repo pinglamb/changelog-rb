@@ -1,9 +1,10 @@
-require 'spec_helper'
-require 'fileutils'
+# frozen_string_literal: true
+require "spec_helper"
+require "fileutils"
 
 RSpec.describe Changelog::Configuration do
-  describe 'default configuration' do
-    it 'has suggested versions_path and summary_path' do
+  describe "default configuration" do
+    it "has suggested versions_path and summary_path" do
       Changelog.configure do |config|
         config.versions_path = "changelog"
         config.summary_path = "CHANGELOG.md"
@@ -13,7 +14,7 @@ RSpec.describe Changelog::Configuration do
       expect(changelog_root).to eq("changelog")
     end
 
-    it 'has configured versions_path and summary_path' do
+    it "has configured versions_path and summary_path" do
       Changelog.configure do |config|
         config.versions_path = "tmp/changelog"
         config.summary_path = "tmp/CHANGELOG.md"
@@ -23,7 +24,7 @@ RSpec.describe Changelog::Configuration do
       expect(changelog_summary).to eq("tmp/CHANGELOG.md")
     end
 
-    it 'has configured versions_path' do
+    it "has configured versions_path" do
       Changelog.configure do |config|
         config.versions_path = "tmp/changelog"
         config.summary_path = "CHANGELOG.md"
@@ -33,7 +34,7 @@ RSpec.describe Changelog::Configuration do
       expect(changelog_summary).to eq("CHANGELOG.md")
     end
 
-    it 'has configured summary_path' do
+    it "has configured summary_path" do
       Changelog.configure do |config|
         config.versions_path = "changelog"
         config.summary_path = "tmp/CHANGELOG.md"

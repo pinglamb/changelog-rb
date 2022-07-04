@@ -1,5 +1,6 @@
-require 'yaml'
-require 'changelog/helpers/git'
+# frozen_string_literal: true
+require "yaml"
+require "changelog/helpers/git"
 
 module Changelog
   module Helpers
@@ -9,22 +10,22 @@ module Changelog
           "## [#{version_text(folder)}]\n"
         else
           meta = WorkaroundYAML.load_file(File.join(destination_root, "#{Changelog.configuration.versions_path}/#{folder}/tag.yml"))
-          date = meta['date'].to_s
+          date = meta["date"].to_s
           "## [#{version_text(folder)}] - #{date}\n"
         end
       end
 
       def version_text(folder)
-        if folder == 'unreleased'
-          'Unreleased'
+        if folder == "unreleased"
+          "Unreleased"
         else
           folder
         end
       end
 
       def version_sha(folder)
-        if folder == 'unreleased'
-          'HEAD'
+        if folder == "unreleased"
+          "HEAD"
         else
           Changelog::Helpers::Git.tag(folder) || folder
         end
@@ -34,8 +35,8 @@ module Changelog
         items = {}
         changelog_files(folder).each do |file|
           yaml = WorkaroundYAML.load_file(file)
-          items[yaml['type']] ||= []
-          items[yaml['type']] << "#{yaml['title'].strip} (@#{yaml['author']})"
+          items[yaml["type"]] ||= []
+          items[yaml["type"]] << "#{yaml['title'].strip} (@#{yaml['author']})"
         end
 
         sections = []

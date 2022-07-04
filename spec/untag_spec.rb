@@ -1,4 +1,5 @@
-require 'spec_helper'
+# frozen_string_literal: true
+require "spec_helper"
 
 RSpec.describe Changelog::Untag do
   before do
@@ -8,24 +9,24 @@ RSpec.describe Changelog::Untag do
 
   let(:shell) { subject.shell }
 
-  it 'removes the tag.yml in the version folder' do
+  it "removes the tag.yml in the version folder" do
     expect(File).to exist("#{changelog_root}/0.1.0/tag.yml")
 
-    shell.mute { subject.go('0.1.0') }
+    shell.mute { subject.go("0.1.0") }
 
     expect(File).not_to exist("#{changelog_root}/0.1.0/tag.yml")
   end
 
-  it 'moves the files in version folder to the unreleased folder' do
-    shell.mute { subject.go('0.1.0') }
+  it "moves the files in version folder to the unreleased folder" do
+    shell.mute { subject.go("0.1.0") }
 
     expect(File).to exist("#{changelog_root}/unreleased/added_something.yml")
     expect(File).to exist("#{changelog_root}/unreleased/fixed_something.yml")
     expect(File).not_to exist("#{changelog_root}/unreleased/tag.yml")
   end
 
-  it 'removes the version folder' do
-    shell.mute { subject.go('0.1.0') }
+  it "removes the version folder" do
+    shell.mute { subject.go("0.1.0") }
 
     expect(File).not_to exist("#{changelog_root}/0.1.0")
   end

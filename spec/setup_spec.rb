@@ -1,24 +1,25 @@
-require 'spec_helper'
+# frozen_string_literal: true
+require "spec_helper"
 
 RSpec.describe Changelog::Setup do
   let(:shell) { subject.shell }
 
-  it 'creates directory ./changelog' do
+  it "creates directory ./changelog" do
     shell.mute { subject.go }
     expect(File).to exist(changelog_root)
   end
 
-  it 'creates directory ./changelog/unreleased' do
+  it "creates directory ./changelog/unreleased" do
     shell.mute { subject.go }
     expect(File).to exist("#{changelog_root}/unreleased")
   end
 
-  it 'creates file ./changelog/unreleased/.gitkeep' do
+  it "creates file ./changelog/unreleased/.gitkeep" do
     shell.mute { subject.go }
     expect(File).to exist("#{changelog_root}/unreleased/.gitkeep")
   end
 
-  it 'is invoked multiple times without unexpected side effects' do
+  it "is invoked multiple times without unexpected side effects" do
     shell.mute { subject.go }
     old_md5sum = check_md5sum_of(changelog_root)
 

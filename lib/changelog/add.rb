@@ -1,24 +1,25 @@
-require 'thor'
-require 'changelog/helpers/shell'
-require 'changelog/helpers/git'
+# frozen_string_literal: true
+require "thor"
+require "changelog/helpers/shell"
+require "changelog/helpers/git"
 
 module Changelog
   class Add < Thor
     include Thor::Actions
 
     def self.source_root
-      File.expand_path('../templates', __dir__)
+      File.expand_path("../templates", __dir__)
     end
 
     no_commands do
-      def go(title, nature: '', author: '', git: nil)
+      def go(title, nature: "", author: "", git: nil)
         @title = if git.nil?
           title
         else
-          git = git.presence || 'HEAD'
+          git = git.presence || "HEAD"
           Changelog::Helpers::Git.comment(git)
         end
-        @title = @title.gsub(/:\w+:/, '')
+        @title = @title.gsub(/:\w+:/, "")
         @nature = nature.presence || extract_nature_from_title(@title)
         @author = author.presence || Changelog::Helpers::Shell.system_user
 
@@ -38,14 +39,14 @@ module Changelog
         filename = @title.parameterize.underscore
 
         empty_directory "#{Changelog.configuration.versions_path}/unreleased" unless File.exists?("#{Changelog.configuration.versions_path}/unreleased")
-        template 'item.yml', "#{Changelog.configuration.versions_path}/unreleased/#{filename}.yml"
+        template "item.yml", "#{Changelog.configuration.versions_path}/unreleased/#{filename}.yml"
 
         true
       end
 
       def extract_nature_from_title(title)
-        first_word = title.parameterize.split('-').first.try(:capitalize)
-        guess_nature_from_word(first_word) || ''
+        first_word = title.parameterize.split("-").first.try(:capitalize)
+        guess_nature_from_word(first_word) || ""
       end
 
       def guess_nature_from_word(word)

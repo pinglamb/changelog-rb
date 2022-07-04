@@ -1,8 +1,9 @@
-require 'thor'
-require 'yaml'
-require 'semantic'
-require 'changelog/helpers/git'
-require 'changelog/helpers/changes'
+# frozen_string_literal: true
+require "thor"
+require "yaml"
+require "semantic"
+require "changelog/helpers/git"
+require "changelog/helpers/changes"
 
 module Changelog
   class Print < Thor

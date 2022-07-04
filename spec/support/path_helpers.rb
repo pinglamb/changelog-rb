@@ -1,10 +1,11 @@
+# frozen_string_literal: true
 module PathHelpers
   def gem_root
-    File.expand_path('../../', File.dirname(__FILE__))
+    File.expand_path("../../", File.dirname(__FILE__))
   end
 
   def destination_root
-    File.expand_path('spec/sandbox', gem_root)
+    File.expand_path("spec/sandbox", gem_root)
   end
 
   def changelog_root

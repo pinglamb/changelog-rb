@@ -1,9 +1,10 @@
+# frozen_string_literal: true
 require "bundler/setup"
-require 'pry'
+require "pry"
 require "changelog-rb"
 
-require_relative 'support/md5sum_helpers'
-require_relative 'support/path_helpers'
+require_relative "support/md5sum_helpers"
+require_relative "support/path_helpers"
 
 RSpec.configure do |config|
   config.example_status_persistence_file_path = ".rspec_status"

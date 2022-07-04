@@ -1,5 +1,6 @@
-require 'active_support'
-require 'active_support/core_ext'
+# frozen_string_literal: true
+require "active_support"
+require "active_support/core_ext"
 
 require "changelog/version"
 require "changelog/setup"
@@ -11,17 +12,17 @@ require "changelog/print"
 
 module Changelog
   def self.natures
-    ['Added', 'Changed', 'Deprecated', 'Removed', 'Fixed', 'Security'].freeze
+    ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Security"].freeze
   end
 
   def self.dictionary
     {
-      'Added'      => %w[add added new],
-      'Changed'    => %w[change changed update updated make made],
-      'Deprecated' => %w[deprecate deprecated],
-      'Removed'    => %w[remove removed delete deleted],
-      'Fixed'      => %w[fix fixed resolve resolved],
-      'Security'   => %w[security protect],
+      "Added"      => %w[add added new],
+      "Changed"    => %w[change changed update updated make made],
+      "Deprecated" => %w[deprecate deprecated],
+      "Removed"    => %w[remove removed delete deleted],
+      "Fixed"      => %w[fix fixed resolve resolved],
+      "Security"   => %w[security protect],
     }
   end
 

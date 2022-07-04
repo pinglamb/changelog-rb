@@ -1,4 +1,5 @@
-require 'digest'
+# frozen_string_literal: true
+require "digest"
 
 module Md5sumHelpers
   def check_md5sum_of(folder)
