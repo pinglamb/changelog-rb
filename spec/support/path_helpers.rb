@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module PathHelpers
   def gem_root
-    File.expand_path("../../", File.dirname(__FILE__))
+    File.expand_path("../../", __dir__)
   end
 
   def destination_root
