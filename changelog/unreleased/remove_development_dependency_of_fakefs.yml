@@ -1,0 +1,4 @@
+type: Changed
+title: >
+  Remove development dependency of fakefs
+author: lijunwei
