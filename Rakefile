@@ -11,4 +11,14 @@ task :flay do
   system "flay lib/*.rb"
 end
 
+namespace :lint do
+  task :magic_comment do
+    system "rubocop -A --only Style/FrozenStringLiteralComment"
+  end
+
+  task :double_quotes do
+    system "rubocop -A --only Style/StringLiterals"
+  end
+end
+
 task :default => [:flog, :flay, :spec]
