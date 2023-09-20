@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 RSpec.describe Changelog::Setup do
-  let(:setup) {
+  let(:setup) do
     Changelog::Setup.new.tap do |i|
       allow(i.shell).to receive(:mute?).and_return(true)
     end
-  }
+  end
 
   it 'creates directory ./changelog' do
     setup.go

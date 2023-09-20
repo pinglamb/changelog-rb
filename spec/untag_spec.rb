@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 RSpec.describe Changelog::Untag do
-  let(:untag) {
+  let(:untag) do
     Changelog::Untag.new.tap do |i|
       allow(i.shell).to receive(:mute?).and_return(true)
     end
-  }
+  end
 
   it 'removes the tag.yml in the version folder' do
     FileUtils.mkdir('changelog')

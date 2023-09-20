@@ -10,15 +10,14 @@ module Changelog
       include Changelog::Helpers::Changes
 
       def go(version = nil)
-        versions = if version
-                     versions = [version]
-                   else
-                     %w[unreleased].push(version_folders.first)
-                   end
+        versions =
+          if version
+            versions = [version]
+          else
+            %w[unreleased].push(version_folders.first)
+          end
 
-        versions.each do |version|
-          print_version(version)
-        end
+        versions.each { |version| print_version(version) }
       end
 
       private
@@ -28,7 +27,7 @@ module Changelog
           puts version_header(version)
           puts read_changes(version)
         else
-          say "changelog/#{version} not found"
+          puts "changelog/#{version} not found"
         end
       end
     end

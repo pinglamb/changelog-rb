@@ -12,24 +12,39 @@ module Changelog
 
     no_commands do
       def go(title, nature: '', author: '', git: nil)
-        @title = if git.nil?
-          title
-        else
-          git = git.presence || 'HEAD'
-          Changelog::Helpers::Git.comment(git)
-        end
+        @title =
+          if git.nil?
+            title
+          else
+            git = git.presence || 'HEAD'
+            Changelog::Helpers::Git.comment(git)
+          end
         @title = @title.gsub(/:\w+:/, '')
         @nature = nature.presence || extract_nature_from_title(@title)
         @author = author.presence || Changelog::Helpers::Shell.system_user
 
         if @title.blank?
-          return say("Error: title is blank\nchangelog add TITLE\nchangelog add -g")
+          return(
+            say("Error: title is blank\nchangelog add TITLE\nchangelog add -g")
+          )
         end
         if @nature.blank?
-          return say("Error: nature is blank\nchangelog add TITLE -t [#{Changelog.natures.join('|')}]")
+          return(
+            say(
+              "Error: nature is blank\nchangelog add TITLE -t [#{
+                Changelog.natures.join('|')
+              }]"
+            )
+          )
         end
         unless @nature.in?(Changelog.natures)
-          return say("Error: nature is invalid\nchangelog add TITLE -t [#{Changelog.natures.join('|')}]")
+          return(
+            say(
+              "Error: nature is invalid\nchangelog add TITLE -t [#{
+                Changelog.natures.join('|')
+              }]"
+            )
+          )
         end
         if @author.blank?
           return say("Error: author is blank\nchangelog add TITLE -u [author]")
@@ -37,7 +52,9 @@ module Changelog
 
         filename = @title.parameterize.underscore
 
-        empty_directory 'changelog/unreleased' unless File.exists?('changelog/unreleased')
+        unless File.exist?('changelog/unreleased')
+          empty_directory 'changelog/unreleased'
+        end
         template 'item.yml', "changelog/unreleased/#{filename}.yml"
 
         true
@@ -52,9 +69,7 @@ module Changelog
         return word if word.blank?
 
         Changelog.dictionary.each do |nature, words|
-          if words.include?(word.downcase)
-            return nature
-          end
+          return nature if words.include?(word.downcase)
         end
 
         nil
